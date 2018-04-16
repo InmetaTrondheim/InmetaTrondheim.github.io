@@ -50,14 +50,119 @@
 				</section>
 				<section>
 					<h4>Docker Compose</h4>
-					</section>
+					<ul>
+						<li>Multi-container application</li>
+						<li>Definerer applikasjonen og kjøremiljø i en yml-fil</li>
+						<li>Bygger og starter flere Dockerfiles og/eller images</li>
+					</ul>
+					<aside class="notes">
+						Docker compose er et vertøy for å definere og kjøre multi-container applikasjoner.
+						Definerer hele applikasjonen i en yml-fil som bygger og starter Dockerfiles/images.
+					</aside>
+				</section>
+				<section>
+					<h4>Docker compose config</h4>
+					<pre><code style="font-size: 60%; line-height: 100%;">
+version: '3'
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - dbdata:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+	dbdata:
+</code></pre>
+					<aside class="notes">
+						Typisk docker compose fil
+						yml
+
+						services
+						volumes
+						network, ikke definert i dette tilfellet og da brukes default network
+					</aside>
+				</section>
+				<section>
+					<h4>Docker Compose Demo</h4>
+					<aside class="notes">
+						API, DB og Website
+					</aside>
+				</section>
+				<section>
+					<h4>Use Cases</h4>
+					<ul>
+						<li>Utviklermiljø</li>
+						<li>Automatisk testmiljø</li>
+						<li>Single host deployment</li>
+					</ul>
+					<aside class="notes">
+						Utviklermiljø: Få opp utviklermiljø raskt med et par kommandoer.
+						Automatisk testmiljø: Opprett og ta ned miljø som kun skal leve mens tester kjører.
+						Single host deployment: Host docker compose applikasjonen din på en VPS eller egen server.
+					</aside>
+				</section>
 				<section>
 					<h4>Docker Swarm</h4>
+					<ul >
+						<li>Kontainer platform</li>
+						<li>Swarm av Docker Engines</li>
+						<li>Kjøremiljø for flere applikasjoner og containere</li>
+						<li>Kan håndtere load balancing og skalering</li>
+						<li class="fragment">Men...</li>
+						<li class="fragment">Dårlig støtte fra de største aktørene</li>
+						<li class="fragment">Kubernetes tar over</li>
+					</ul>
+					<aside class="notes">
+						Swarm av docker engines som kjører på forskjellige maskiner
+
+					</aside>
 				</section>
 				<section>
 					<h4>Kubernetes (K8S)</h4>
-
+					<aside class="notes">
+						
+					</aside>
 				</section>
+
+				<section>
+					<h4>Kubernetes (K8S)</h4>
+					<ul> 
+						<li>Kontainer platform</li>
+						<li>Open Source system for å håndtere kontainerapplikasjoner</li>
+					</ul>
+					<aside class="notes">
+						
+					</aside>
+				</section>
+
+				<section>
+						<h4>Kubernetes Konsepter</h4>
+						<ul> 
+							<li>Kontainer platform</li>
+							<li>Open Source system for å håndtere kontainerapplikasjoner</li>
+						</ul>
+						<aside class="notes">
+							
+						</aside>
+					</section>
+
 				<section>
 					<h4>Hvorfor bruke Kubernetes (K8S)</h4>
 					<ul>
@@ -65,6 +170,9 @@
 						<li>Deploye nye versjoner uten nedetid</li>
 						<li>Scaling</li>
 					</ul>
+					<aside class="notes">
+						
+					</aside>
 				</section>
 			</div>
 		</div>
