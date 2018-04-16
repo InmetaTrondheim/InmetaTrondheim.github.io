@@ -1,0 +1,8 @@
+.slide--docker-containers {
+  display: grid;
+  grid-template-columns: 1fr 1fr; }
+  .slide--docker-containers .image--containers {
+    grid-column: 1 / 1; }
+  .slide--docker-containers .list--containers {
+    grid-column: 2 / 2;
+    align-self: center; }

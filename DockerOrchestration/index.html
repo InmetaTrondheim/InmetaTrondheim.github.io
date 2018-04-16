@@ -6,7 +6,10 @@
 
 		<title>reveal.js</title>
 
+		<link rel="stylesheet" href="css/style.css">		
+
 		<link rel="stylesheet" href="css/reveal.css">
+
 		<link rel="stylesheet" href="css/theme/black.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -26,10 +29,24 @@
 			<div class="slides">
 				<section>	
 					<h1>Docker</h1>
-					<h3>Orkestrering av kontainere med kubernetes</h3>
+					<h3>Orkestrering av kontainere</h3>
 				</section>
-				<section>
-					<h4>Docker kontainere</h4>
+				<section  >
+					<h4 class="header--containers" >Docker kontainere</h4>
+					<div class="slide--docker-containers">
+							<img class="image--containers" src="./assets/containers.png" alt="Hva er en container"></img>
+							<ul class="list--containers">
+								<li>Applikasjons lag</li>
+								<li>Deler OS kernel med andre kontainere</li>
+								<li>Tar opp lite plass</li>
+							</ul>
+					</div>
+
+					<aside class="notes">
+						Kontainere har applikasjonen og alle avhengighetene som applikasjonen krever
+						De deler operativsystem med andre kontainere, men er isolert fra hverandre
+						Fotavtrykket til en kontainer blir derfor veldig liten sammenlignet med en Virtual Machine
+					</aside>
 				</section>
 				<section>
 					<h4>Docker Compose</h4>
