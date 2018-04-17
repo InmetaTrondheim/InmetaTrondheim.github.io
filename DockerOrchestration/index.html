@@ -1,68 +1,70 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/style.css">		
+	<title>Container Orchestration</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/style.css">
 
-		<link rel="stylesheet" href="css/theme/black.css">
+	<link rel="stylesheet" href="css/reveal.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>	
-					<h1>Docker</h1>
-					<h3>Orkestrering av kontainere</h3>
-				</section>
-				<section  >
-					<h4 class="header--containers" >Docker kontainere</h4>
-					<div class="slide--docker-containers">
-							<img class="image--containers" src="./assets/containers.png" alt="Hva er en container"></img>
-							<ul class="list--containers">
-								<li>Applikasjons lag</li>
-								<li>Deler OS kernel med andre kontainere</li>
-								<li>Tar opp lite plass</li>
-							</ul>
-					</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-					<aside class="notes">
-						Kontainere har applikasjonen og alle avhengighetene som applikasjonen krever
-						De deler operativsystem med andre kontainere, men er isolert fra hverandre
-						Fotavtrykket til en kontainer blir derfor veldig liten sammenlignet med en Virtual Machine
-					</aside>
-				</section>
-				<section>
-					<h4>Docker Compose</h4>
-					<ul>
-						<li>Multi-container application</li>
-						<li>Definerer applikasjonen og kjøremiljø i en yml-fil</li>
-						<li>Bygger og starter flere Dockerfiles og/eller images</li>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Docker</h1>
+				<h3>Orkestrering av kontainere</h3>
+			</section>
+			<section>
+				<h4 class="header--containers">Docker kontainere</h4>
+				<div class="slide--docker-containers">
+					<img class="image--containers" data-src="./assets/containers.png" alt="Hva er en container"></img>
+					<ul class="list--containers">
+						<li>Applikasjons lag</li>
+						<li>Deler OS kernel med andre kontainere</li>
+						<li>Tar opp lite plass</li>
 					</ul>
-					<aside class="notes">
-						Docker compose er et vertøy for å definere og kjøre multi-container applikasjoner.
-						Definerer hele applikasjonen i en yml-fil som bygger og starter Dockerfiles/images.
-					</aside>
-				</section>
-				<section>
-					<h4>Docker compose config</h4>
-					<pre><code style="font-size: 60%; line-height: 100%;">
+				</div>
+
+				<aside class="notes">
+					Kontainere har applikasjonen og alle avhengighetene som applikasjonen krever
+					De deler operativsystem med andre kontainere, men er isolert fra hverandre 
+					Fotavtrykket til en kontainer blir derfor veldig liten sammenlignet med en Virtual Machine
+				</aside>
+			</section>
+			<section>
+				<h4>Docker Compose</h4>
+				<ul>
+					<li>Multi-container application</li>
+					<li>Definerer applikasjonen og kjøremiljø i en yml-fil</li>
+					<li>Bygger og starter flere Dockerfiles og/eller images</li>
+				</ul>
+				<aside class="notes">
+					Docker compose er et vertøy for å definere og kjøre multi-container applikasjoner.
+					Definerer hele applikasjonen i en yml-fil som bygger og starter Dockerfiles/images.
+				</aside>
+			</section>
+			<section>
+				<h4>Docker compose config</h4>
+				<pre><code style="font-size: 60%; line-height: 100%;">
 version: '3'
 services:
    db:
@@ -90,108 +92,129 @@ services:
 volumes:
 	dbdata:
 </code></pre>
-					<aside class="notes">
-						Typisk docker compose fil
-						yml
+				<aside class="notes">
+					Typisk docker compose fil yml services volumes.
+					network, ikke definert i dette tilfellet og da brukes default network.
+				</aside>
+			</section>
+			<section>
+				<h4>Docker Compose Demo</h4>
+				<aside class="notes">
+					API, DB og Website
+				</aside>
+			</section>
+			<section>
+				<h4>Use Cases</h4>
+				<ul>
+					<li>Utviklermiljø</li>
+					<li>Automatisk testmiljø</li>
+					<li>Single host deployment</li>
+				</ul>
+				<aside class="notes">
+					Utviklermiljø: Få opp utviklermiljø raskt med et par kommandoer. 
+					Automatisk testmiljø: Opprett og ta ned miljø som kun skal leve mens tester kjører. 
+					Single host deployment: Host docker compose applikasjonen din på en VPS eller egen server.
+					Men hva hvis man vil kjøre dette i skyen?
+				</aside>
+			</section>
+			<section>
+				<h4>Docker Swarm</h4>
+				<ul>
+					<li>Kontainer platform</li>
+					<li>Swarm av Docker Engines</li>
+					<li>Kjøremiljø for flere applikasjoner og containere</li>
+					<li>Kan håndtere load balancing og skalering</li>
+				</ul>
+				<aside class="notes">
+					Swarm av docker engines som kan kjøre på forskjellige maskiner
+				</aside>
+			</section>
 
-						services
-						volumes
-						network, ikke definert i dette tilfellet og da brukes default network
-					</aside>
-				</section>
-				<section>
-					<h4>Docker Compose Demo</h4>
-					<aside class="notes">
-						API, DB og Website
-					</aside>
-				</section>
-				<section>
-					<h4>Use Cases</h4>
-					<ul>
-						<li>Utviklermiljø</li>
-						<li>Automatisk testmiljø</li>
-						<li>Single host deployment</li>
-					</ul>
-					<aside class="notes">
-						Utviklermiljø: Få opp utviklermiljø raskt med et par kommandoer.
-						Automatisk testmiljø: Opprett og ta ned miljø som kun skal leve mens tester kjører.
-						Single host deployment: Host docker compose applikasjonen din på en VPS eller egen server.
-					</aside>
-				</section>
-				<section>
-					<h4>Docker Swarm</h4>
-					<ul >
-						<li>Kontainer platform</li>
-						<li>Swarm av Docker Engines</li>
-						<li>Kjøremiljø for flere applikasjoner og containere</li>
-						<li>Kan håndtere load balancing og skalering</li>
-						<li class="fragment">Men...</li>
-						<li class="fragment">Dårlig støtte fra de største aktørene</li>
-						<li class="fragment">Kubernetes tar over</li>
-					</ul>
-					<aside class="notes">
-						Swarm av docker engines som kjører på forskjellige maskiner
+			<section>
+				<h4>Kubernetes (K8S)</h4>
+			</section>
 
-					</aside>
-				</section>
-				<section>
-					<h4>Kubernetes (K8S)</h4>
-					<aside class="notes">
-						
-					</aside>
-				</section>
+			<section>
+				<ul>
+					<li>Kontainer platform</li>
+					<li>Open Source system for å håndtere kontainerapplikasjoner</li>
+					<li>Støttet av Google</li>
+					<li>Kan kjøres on-premise eller cloud</li>
+				</ul>
+				<aside class="notes">
+					Et bedre alternativ?
+					Har mer github aktivitet enn Docker Swarm
+					Nylig inkludert i Docker installasjonen
+				</aside>
+			</section>
 
-				<section>
-					<h4>Kubernetes (K8S)</h4>
-					<ul> 
-						<li>Kontainer platform</li>
-						<li>Open Source system for å håndtere kontainerapplikasjoner</li>
-					</ul>
-					<aside class="notes">
-						
-					</aside>
-				</section>
+			
+			<section data-background="#FFF">
+				<img data-src="./assets/containerOrchestration.svg" alt="Orchestration" style="max-width: 80%;"></img>
+				<aside class="notes">
+					Kontainer orkestrering med flere servics
+				</aside>
+			</section>
 
-				<section>
-						<h4>Kubernetes Konsepter</h4>
-						<ul> 
-							<li>Kontainer platform</li>
-							<li>Open Source system for å håndtere kontainerapplikasjoner</li>
-						</ul>
-						<aside class="notes">
-							
-						</aside>
-					</section>
+			<section>
+				<h4>Kubernetes Konsepter</h4>
 
-				<section>
-					<h4>Hvorfor bruke Kubernetes (K8S)</h4>
-					<ul>
-						<li>Økosystem av applikasjoner og services</li>
-						<li>Deploye nye versjoner uten nedetid</li>
-						<li>Scaling</li>
-					</ul>
-					<aside class="notes">
-						
-					</aside>
-				</section>
-			</div>
+				<ul>
+					<li>Master node: API, manager og scheduler</li>
+					<li>Noder: Maskin/Engine</li>
+					<li>Pods</li>
+					<li>Services</li>
+					<li>Volumes</li>
+				</ul>
+
+				<aside class="notes">
+					Master node som har kontroll over noder og kan schedule jobber
+					Noder som kjører pods
+					Pods har et sett av services og volum, kan sammenlignes med en docker-compose kjøring.
+				</aside>
+			</section>
+
+			<section data-background="#FFF" >
+				<img data-src="./assets/module_01_cluster.svg" alt="Kubernetes cluster" ></img>
+				<aside class="notes">
+					Master og flere noder danner en cluster
+				</aside>
+			</section>
+
+			<section>
+				<h4>Hvorfor bruke Kubernetes?</h4>
+				<ul>
+					<li>Fleksibel hosting</li>
+					<li>Økosystem av applikasjoner og services</li>
+					<li>Deploye nye versjoner uten nedetid</li>
+					<li>Scaling ved behov med replicas</li>
+				</ul>
+				<aside class="notes">
+					Kan hoste on on-premise eller i skyen 
+					Kan sette opp et økosystem av applikasjoner og services med fleksibel utvidbarhet, i motsetning til single purpose server, så man vokser aldri ut av kjøremiljøet.
+					Nye versjoner av services og applikasjoner kan deployes uten nedetid.
+					Løsningen kan skaleres ved at det startes opp flere replica pods ved behov.
+				</aside>
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
 </html>
